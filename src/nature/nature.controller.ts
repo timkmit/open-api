@@ -12,7 +12,7 @@ export class NatureController {
   @ApiOperation({ summary: 'Получение всех объектов природы' })
   @ApiResponse({ status: 200, description: 'Возвращает список объектов' })
   async getAllNature(@Query('limit') limit: string) {
-    const parsedLimit = parseInt(limit, 3) || 3; 
+    const parsedLimit = parseInt(limit, 10) || 3; 
     return this.natureService.getAllNature(parsedLimit);
   }
 

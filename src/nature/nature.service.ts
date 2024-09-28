@@ -5,8 +5,10 @@ import { PrismaService } from '../prisma/prisma.service';
 export class NatureService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getAllNature() {
-    return this.prisma.nature.findMany();
+  async getAllNature(limit: number) {
+    return this.prisma.nature.findMany({
+      take: limit, 
+    });
   }
 
   async createNature(data: { title: string }) {

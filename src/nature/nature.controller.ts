@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Delete, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Param, Body, Query } from '@nestjs/common';
 import { NatureService } from './nature.service';
 import { CreateNatureDto } from './dto/create-nature.dto';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
@@ -11,8 +11,9 @@ export class NatureController {
   @Get()
   @ApiOperation({ summary: 'Получение всех объектов природы' })
   @ApiResponse({ status: 200, description: 'Возвращает список объектов' })
-  async getNature() {
-    return this.natureService.getAllNature();
+  async getAllNature(@Query('limit') limit: string) {
+    const parsedLimit = parseInt(limit, 3) || 3; 
+    return this.natureService.getAllNature(parsedLimit);
   }
 
   @Post()
